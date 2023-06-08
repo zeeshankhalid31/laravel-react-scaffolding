@@ -1,38 +1,41 @@
-'use client';
+'use client'
 
-import { useRef, useState } from 'react';
+import { useRef, useState } from 'react'
 // import altogic from '../../configs/altogic';
 
 function UserInfo({ user, setUser }) {
-    const inputRef = useRef();
+    const inputRef = useRef()
 
-    const [name, setName] = useState('');
+    const [name, setName] = useState('')
 
-    const [changeMode, setChangeMode] = useState(false);
-    const [errors, setErrors] = useState(null);
+    const [changeMode, setChangeMode] = useState(false)
+    const [errors, setErrors] = useState(null)
 
     const handleNameChange = () => {
-        setChangeMode(true);
+        setChangeMode(true)
         setTimeout(() => {
-            inputRef.current.focus();
-        }, 100);
-    };
+            inputRef.current.focus()
+        }, 100)
+    }
 
     const handleKeyDown = async e => {
         if (e.code === 'Enter') {
-            setErrors(null);
+            setErrors(null)
 
-            const { data: updatedUser, errors: apiErrors } = await altogic.db
+            const {
+                data: updatedUser,
+                errors: apiErrors,
+            } = await altogic.db
                 .model('users')
                 .object(user._id)
-                .update({ name });
+                .update({ name })
 
-            if (apiErrors) setErrors(apiErrors.items[0].message);
-            else setUser(updatedUser);
+            if (apiErrors) setErrors(apiErrors.items[0].message)
+            else setUser(updatedUser)
 
-            setChangeMode(false);
+            setChangeMode(false)
         }
-    };
+    }
 
     return (
         <section className="border p-4 w-full">
@@ -57,7 +60,7 @@ function UserInfo({ user, setUser }) {
             )}
             {errors && <div>{errors}</div>}
         </section>
-    );
+    )
 }
 
-export default UserInfo;
+export default UserInfo

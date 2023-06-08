@@ -1,9 +1,9 @@
-"use client";
+'use client'
 
-import { ResponsiveNavButton } from "@/components/ResponsiveNavLink";
-import { useAuth } from "@/hooks/auth";
-import Link from "next/link";
-import { useState } from "react";
+import { ResponsiveNavButton } from '@/components/ResponsiveNavLink'
+import { useAuth } from '@/hooks/auth'
+import Link from 'next/link'
+import { useState } from 'react'
 
 export default function NavbarClient() {
     // const [user, setUser] = useState(false)
@@ -15,10 +15,12 @@ export default function NavbarClient() {
                 <>
                     <Link
                         href="/dashboard"
-                        className="ml-4 text-sm text-gray-700 underline" >
+                        className="ml-4 text-sm text-gray-700 underline">
                         Dashboard
                     </Link>
-                    <ResponsiveNavButton onClick={logout}>Logout</ResponsiveNavButton>
+                    <ResponsiveNavButton onClick={logout}>
+                        Logout
+                    </ResponsiveNavButton>
                 </>
             ) : (
                 <>
@@ -34,10 +36,7 @@ export default function NavbarClient() {
                         Register
                     </Link>
                 </>
-
-            )
-            }
+            )}
         </>
     )
 }
-

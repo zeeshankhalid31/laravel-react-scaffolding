@@ -1,24 +1,28 @@
-'use client';
+'use client'
 
 // import altogic from '../../configs/altogic';
 
 function Sessions({ sessions, setSessions }) {
     const logoutSession = async session => {
         // const { errors } = await altogic.auth.signOut(session.token);
-        const errors = false;
+        const errors = false
         if (!errors) {
-            setSessions(sessions.filter(s => s.token !== session.token));
+            setSessions(sessions.filter(s => s.token !== session.token))
         }
-    };
+    }
 
     return (
         <div className="border p-4 space-y-4">
             <p className="text-3xl">All Sessions</p>
             <ul className="flex flex-col gap-2">
                 {sessions?.map(session => (
-                    <li key={session.token} className="flex justify-between gap-12">
+                    <li
+                        key={session.token}
+                        className="flex justify-between gap-12">
                         <div>
-                            {session.isCurrent && <span> Current Session </span>}
+                            {session.isCurrent && (
+                                <span> Current Session </span>
+                            )}
                             <span>
                                 {' '}
                                 <strong>Device name: </strong>
@@ -26,12 +30,15 @@ function Sessions({ sessions, setSessions }) {
                             </span>
                         </div>
                         <div className="flex items-center gap-2">
-                            <span>{new Date(session.creationDtm).toLocaleDateString('en-US')}</span>
+                            <span>
+                                {new Date(
+                                    session.creationDtm,
+                                ).toLocaleDateString('en-US')}
+                            </span>
                             {!session.isCurrent && (
                                 <button
                                     onClick={() => logoutSession(session)}
-                                    className="border grid place-items-center p-2 h-8 w-8 aspect-square leading-none"
-                                >
+                                    className="border grid place-items-center p-2 h-8 w-8 aspect-square leading-none">
                                     X
                                 </button>
                             )}
@@ -40,7 +47,7 @@ function Sessions({ sessions, setSessions }) {
                 ))}
             </ul>
         </div>
-    );
+    )
 }
 
-export default Sessions;
+export default Sessions

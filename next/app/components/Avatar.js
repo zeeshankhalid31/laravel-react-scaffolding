@@ -1,41 +1,41 @@
-'use client';
+'use client'
 
-import { useState } from 'react';
+import { useState } from 'react'
 // import altogic from '../../configs/altogic';
 
 function Avatar({ user, setUser }) {
-    const [loading, setLoading] = useState(false);
-    const [errors, setErrors] = useState(null);
+    const [loading, setLoading] = useState(false)
+    const [errors, setErrors] = useState(null)
 
     const handleFileChange = async e => {
-        const file = e.target.files[0];
-        e.target.value = null;
-        if (!file) return;
+        const file = e.target.files[0]
+        e.target.value = null
+        if (!file) return
         try {
-            setLoading(true);
-            setErrors(null);
-            const { publicPath } = await updateProfilePicture(file);
-            const updatedUser = await updateUser({ profilePicture: publicPath });
-            setUser(updatedUser);
+            setLoading(true)
+            setErrors(null)
+            const { publicPath } = await updateProfilePicture(file)
+            const updatedUser = await updateUser({ profilePicture: publicPath })
+            setUser(updatedUser)
         } catch (e) {
-            setErrors(e.message);
+            setErrors(e.message)
         } finally {
-            setLoading(false);
+            setLoading(false)
         }
-    };
+    }
     const updateProfilePicture = async file => {
         const data = {}
-        const errors = false;
+        const errors = false
         // const { data, errors } = await altogic.storage.bucket('root').upload(`user_${user._id}`, file);
-        if (errors) throw new Error("Couldn't upload file");
-        return data;
-    };
+        if (errors) throw new Error("Couldn't upload file")
+        return data
+    }
     const updateUser = async data => {
-        const errors = false;
+        const errors = false
         // const { data: updatedUser, errors } = await altogic.db.model('users').object(user._id).update(data);
-        if (errors) throw new Error("Couldn't update user");
-        return updatedUser;
-    };
+        if (errors) throw new Error("Couldn't update user")
+        return updatedUser
+    }
 
     return (
         <div>
@@ -63,10 +63,12 @@ function Avatar({ user, setUser }) {
                         onChange={handleFileChange}
                     />
                 </label>
-                {errors && <div className="bg-red-500 p-2 text-white">{errors}</div>}
+                {errors && (
+                    <div className="bg-red-500 p-2 text-white">{errors}</div>
+                )}
             </div>
         </div>
-    );
+    )
 }
 
-export default Avatar;
+export default Avatar
