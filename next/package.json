@@ -20,8 +20,7 @@
     "react-dom": "latest",
     "remark": "^14.0.3",
     "remark-html": "^15.0.2",
-    "swr": "latest",
-    "tw-elements": "^1.0.0-beta2"
+    "swr": "latest"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.12.1",
