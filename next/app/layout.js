@@ -1,4 +1,6 @@
 import Navbar from './navbar'
+import '../src/styles/global.css'
+import "tw-elements/dist/css/tw-elements.min.css";
 
 export const metadata = {
     title: 'Next.js app',
@@ -9,7 +11,7 @@ export default function RootLayout({ header, children }) {
     return (
         <html lang="en">
             <body>
-                <div className="min-h-screen bg-gray-100">
+                <div className="bg-gray-100">
                     <Navbar />
                 </div>
                 {/* Page Heading */}

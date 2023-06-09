@@ -64,9 +64,14 @@ const Navigation = ({ user }) => {
                                 </button>
                             }>
                             <Link
+                                href="/dashboard/users/list"
+                                className="w-full text-left block px-4 py-2 text-sm leading-5 text-gray-700  focus:outline-none transition duration-150 ease-in-out">
+                                Users List 
+                            </Link>
+                            <Link
                                 href="/dashboard/user-list"
                                 className="w-full text-left block px-4 py-2 text-sm leading-5 text-gray-700  focus:outline-none transition duration-150 ease-in-out">
-                                Users List
+                                Users List (old)
                             </Link>
                             {/* Authentication */}
                             <DropdownButton onClick={logout}>
@@ -150,9 +155,14 @@ const Navigation = ({ user }) => {
 
                         <div className="mt-3 space-y-1">
                             <Link
-                                href="/dashboard/user-list"
+                                href="/dashboard/users/list"
                                 className="w-full text-left block px-4 py-2 text-sm leading-5 text-gray-700  focus:outline-none transition duration-150 ease-in-out">
                                 Users List
+                            </Link>
+                            <Link
+                                href="/dashboard/user-list"
+                                className="w-full text-left block px-4 py-2 text-sm leading-5 text-gray-700  focus:outline-none transition duration-150 ease-in-out">
+                                Users List (old)
                             </Link>
                             {/* Authentication */}
                             <ResponsiveNavButton onClick={logout}>
