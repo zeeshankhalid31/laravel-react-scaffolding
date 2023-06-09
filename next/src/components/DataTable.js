@@ -1,3 +1,5 @@
+'use client'
+
 import Date from './Date'
 
 export default function DataTable({ tableConfig, data }) {
@@ -9,7 +11,10 @@ export default function DataTable({ tableConfig, data }) {
                     <tr key={`data-table-header-key`}>
                         {tableConfig.map(config => {
                             return (
-                                <th key={`data-table-header-col-key-${config.name}`} scope="col" className="px-6 py-4">
+                                <th
+                                    key={`data-table-header-col-key-${config.name}`}
+                                    scope="col"
+                                    className="px-6 py-4">
                                     {config.title}
                                 </th>
                             )
