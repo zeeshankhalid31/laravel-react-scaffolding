@@ -11,10 +11,11 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        return UserResource::collection(User::paginate());
+        $per_page = (int) $request->input('per_page');
+        return UserResource::collection(User::paginate($per_page));
     }
 
     /**

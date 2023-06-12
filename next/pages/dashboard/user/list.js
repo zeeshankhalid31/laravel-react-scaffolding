@@ -6,7 +6,7 @@ import DataTable from '@/components/DataTable'
 import useSWR from 'swr'
 import axios from '@/lib/axios'
 
-const GetUserListData = (pageIndex) => axios.get(`/api/users?page=${pageIndex}&limit=10`)
+const GetUserListData = (URL) => axios.get(URL)
     .then(res => res.data)
     .catch(error => { throw error })
 
@@ -14,15 +14,16 @@ const GetUserListData = (pageIndex) => axios.get(`/api/users?page=${pageIndex}&l
 
 
 export default function UserList() {
-    const [ pageIndex, setPageIndex ] = useState(0)
-    const { data: users, error } = useSWR(`/api/users?page=${pageIndex}&limit=10`, GetUserListData)
+    const [ pageIndex, setPageIndex ] = useState(1)
+    const { data: users, error } = useSWR(`/api/users?page=${pageIndex}&per_page=`, GetUserListData)
 
     const tableConfig = [
+        { name: 'id', title: 'ID' },
         { name: 'name', title: 'Name' },
         { name: 'email', title: 'Email' },
         { name: 'created_at', title: 'Created At', type: 'date' },
     ]
-    console.log(users, error);
+    console.log(users, error, pageIndex);
 
     return (
         <AppLayout
@@ -43,7 +44,8 @@ export default function UserList() {
                         :
                         <>
                             <DataTable tableConfig={tableConfig} data={users.data} />
-                            <button onClick={() => setPageIndex(pageIndex == 0 ? 0 : pageIndex - 1)}>Previous</button>
+                            <button onClick={() => setPageIndex(pageIndex == 1 ? 1 : pageIndex - 1)}>Previous</button>
+                            <button onClick={() => setPageIndex( pageIndex + 1)}>Next</button>
                         </>
                 }
 
