@@ -1,20 +1,29 @@
+"use client";
+
 import AppLayout from '@/components/Layouts/AppLayout'
 import Head from 'next/head'
 import style from './list.module.css'
-import { Suspense, useEffect, useState } from 'react'
+import { Suspense, useEffect, useRef, useState } from 'react'
 import DataTable from '@/components/DataTable'
 import useSWR from 'swr'
 import axios from '@/lib/axios'
+import { useRouter } from 'next/router'
 
 const GetUserListData = (URL) => axios.get(URL)
     .then(res => res.data)
     .catch(error => { throw error })
 
 
-
-
 export default function UserList() {
-    const [ pageIndex, setPageIndex ] = useState(1)
+    const router = useRouter();
+
+    const { asPath } = useRouter();
+    const hash = asPath.split('#')[1];
+    const pageNum = (hash && hash.match(/\d+/)) ? hash.match(/\d+/)[0] : 1
+    console.log('hash:', hash, 'pageNum', pageNum);
+
+    const [pageIndex, setPageIndex] = useState(pageNum)
+
     const { data: users, error } = useSWR(`/api/users?page=${pageIndex}&per_page=`, GetUserListData)
 
     const tableConfig = [
@@ -25,6 +34,10 @@ export default function UserList() {
     ]
     console.log(users, error, pageIndex);
 
+    useEffect(() => {
+        router.push({ hash: `page${pageIndex}` })
+
+    }, [pageIndex, asPath])
     return (
         <AppLayout
             header={
@@ -45,7 +58,7 @@ export default function UserList() {
                         <>
                             <DataTable tableConfig={tableConfig} data={users.data} />
                             <button onClick={() => setPageIndex(pageIndex == 1 ? 1 : pageIndex - 1)}>Previous</button>
-                            <button onClick={() => setPageIndex( pageIndex + 1)}>Next</button>
+                            <button onClick={() => setPageIndex(pageIndex + 1)}>Next</button>
                         </>
                 }
 

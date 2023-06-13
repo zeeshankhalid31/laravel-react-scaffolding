@@ -14,7 +14,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         //
-        $per_page = (int) $request->input('per_page');
+        $per_page = (int) $request->input('per_page', 10);
         return UserResource::collection(User::paginate($per_page));
     }
 
