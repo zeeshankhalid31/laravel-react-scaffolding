@@ -17,6 +17,7 @@ const GetUserListData = (URL) => axios.get(URL)
 export default function UserList() {
     const router = useRouter();
 
+    //#page1 routing on client side.
     const { asPath } = useRouter();
     const hash = asPath.split('#')[1];
     const pageNum = (hash && hash.match(/\d+/)) ? hash.match(/\d+/)[0] : 1
@@ -24,10 +25,10 @@ export default function UserList() {
 
     const [pageIndex, setPageIndex] = useState(pageNum)
 
-    const { data: users, error } = useSWR(`/api/users?page=${pageIndex}&per_page=`, GetUserListData)
+    const { data: users, error } = useSWR(`/api/users?page=${pageIndex}&per_page=5`, GetUserListData)
 
     const tableConfig = [
-        { name: 'id', title: 'ID' },
+        { name: 'id', title: 'ID', edit: '/dashboard/user/' },
         { name: 'name', title: 'Name' },
         { name: 'email', title: 'Email' },
         { name: 'created_at', title: 'Created At', type: 'date' },

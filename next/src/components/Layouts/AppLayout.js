@@ -1,5 +1,6 @@
 import Navigation from '@/components/Layouts/Navigation'
 import { useAuth } from '@/hooks/auth'
+import { Suspense } from 'react'
 
 const AppLayout = ({ header, children }) => {
     const { user } = useAuth({ middleware: 'auth' })
@@ -16,7 +17,11 @@ const AppLayout = ({ header, children }) => {
             </header>
 
             {/* Page Content */}
-            <main>{children}</main>
+            <main>
+                <Suspense fallback={<p>Loading user data ...</p>}>
+                    {children}
+                </Suspense>
+            </main>
         </div>
     )
 }
