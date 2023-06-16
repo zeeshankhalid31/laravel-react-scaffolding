@@ -59,7 +59,7 @@ export default function UserList() {
                         <>
                             <DataTable tableConfig={tableConfig} data={users.data} />
                             <button onClick={() => setPageIndex(pageIndex == 1 ? 1 : pageIndex - 1)}>Previous</button>
-                            <button onClick={() => setPageIndex(pageIndex + 1)}>Next</button>
+                            <button onClick={() => setPageIndex(parseInt(pageIndex) + 1)}>Next</button>
                         </>
                 }
 
