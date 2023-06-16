@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProfileUpdateRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -56,8 +58,19 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $validated = $request->validate([
+            'name' => "required|max:225",
+            'email' => ['email', 'max:255', Rule::unique(User::class)->ignore($id)],
+        ]);
         //
-       return $id;
+
+        if ($validated) {
+            $user = User::find($id);
+            $user->name = $validated['name'];
+            $user->email = $validated['email'];
+            $user->update();
+            return new UserResource($user);
+        }
     }
 
     /**

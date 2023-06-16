@@ -34,26 +34,16 @@ export default function EditUser() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        // Send the data to the server in JSON format.
-        const JSONdata = JSON.stringify(user)
 
         // API endpoint where we send form data.
         const endpoint = `/api/users/${user.id}`
 
-        // Form the request for sending data to the server.
-        const options = {
-            // The method is POST because we are sending data.
-            method: 'PUT',
-            // Tell the server we're sending JSON.
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            // Body of the request is the JSON data we created above.
-            body: JSONdata,
-        }
-
         // Send the form data to our forms API on Vercel and get a response.
-        const response = await axios(endpoint, options)
+        await axios.put(endpoint, user).then(res => {
+            setUser(res.data.data);
+        }).catch(error => {
+            console.log(error)
+        });
 
     }
 
@@ -77,6 +67,7 @@ export default function EditUser() {
                         <input type="text" id="name" name="name" defaultValue={user.name} onChange={onChangeHandler} />
                         <label htmlFor="email">Email:</label>
                         <input type="text" id="email" name="email" defaultValue={user.email} onChange={onChangeHandler} />
+                        <input type='test' defaultValue={user.updated_at} readOnly />
                         <button type="submit">Submit</button>
                     </form>
                 </>
