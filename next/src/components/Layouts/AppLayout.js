@@ -17,9 +17,7 @@ const AppLayout = ({ header, children }) => {
             </header>
 
             {/* Page Content */}
-            <main>
-                {children}
-            </main>
+            <main>{children}</main>
         </div>
     )
 }

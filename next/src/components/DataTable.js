@@ -46,8 +46,22 @@ export default function DataTable({ tableConfig, data }) {
                                             <td
                                                 key={`data-table-tbody-col-key-${config.name}`}
                                                 className="whitespace-nowrap px-6 py-4">
-                                                {(config.edit) ? (<><Link href={config.edit +''+ item[config.name]}>{item[config.name]}</Link> </>) : item[config.name]}
-
+                                                {config.edit ? (
+                                                    <>
+                                                        <Link
+                                                            href={
+                                                                config.edit +
+                                                                '' +
+                                                                item[
+                                                                    config.name
+                                                                ]
+                                                            }>
+                                                            {item[config.name]}
+                                                        </Link>{' '}
+                                                    </>
+                                                ) : (
+                                                    item[config.name]
+                                                )}
                                             </td>
                                         )
                                     }
