@@ -18,9 +18,7 @@ const AppLayout = ({ header, children }) => {
 
             {/* Page Content */}
             <main>
-                <Suspense fallback={<p>Loading user data ...</p>}>
-                    {children}
-                </Suspense>
+                {children}
             </main>
         </div>
     )
