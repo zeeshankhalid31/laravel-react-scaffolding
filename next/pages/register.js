@@ -1,13 +1,9 @@
-import ApplicationLogo from '@/components/ApplicationLogo'
 import AuthCard from '@/components/AuthCard'
-import Button from '@/components/Button'
 import GuestLayout from '@/components/Layouts/GuestLayout'
-import Input from '@/components/Input'
-import InputError from '@/components/InputError'
-import Label from '@/components/Label'
 import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
 import { useState } from 'react'
+import { Box, Button, Checkbox, FormControlLabel, Grid, TextField } from '@mui/material'
 
 const Register = () => {
     const { register } = useAuth({
@@ -35,99 +31,75 @@ const Register = () => {
 
     return (
         <GuestLayout>
-            <AuthCard
-                logo={
-                    <Link href="/">
-                        <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
-                    </Link>
-                }>
-                <form onSubmit={submitForm}>
-                    {/* Name */}
-                    <div>
-                        <Label htmlFor="name">Name</Label>
-
-                        <Input
-                            id="name"
-                            type="text"
-                            value={name}
-                            className="block mt-1 w-full"
-                            onChange={event => setName(event.target.value)}
-                            required
-                            autoFocus
-                        />
-
-                        <InputError messages={errors.name} className="mt-2" />
-                    </div>
-
-                    {/* Email Address */}
-                    <div className="mt-4">
-                        <Label htmlFor="email">Email</Label>
-
-                        <Input
-                            id="email"
-                            type="email"
-                            value={email}
-                            className="block mt-1 w-full"
-                            onChange={event => setEmail(event.target.value)}
-                            required
-                        />
-
-                        <InputError messages={errors.email} className="mt-2" />
-                    </div>
-
-                    {/* Password */}
-                    <div className="mt-4">
-                        <Label htmlFor="password">Password</Label>
-
-                        <Input
-                            id="password"
-                            type="password"
-                            value={password}
-                            className="block mt-1 w-full"
-                            onChange={event => setPassword(event.target.value)}
-                            required
-                            autoComplete="new-password"
-                        />
-
-                        <InputError
-                            messages={errors.password}
-                            className="mt-2"
-                        />
-                    </div>
-
-                    {/* Confirm Password */}
-                    <div className="mt-4">
-                        <Label htmlFor="passwordConfirmation">
-                            Confirm Password
-                        </Label>
-
-                        <Input
-                            id="passwordConfirmation"
-                            type="password"
-                            value={passwordConfirmation}
-                            className="block mt-1 w-full"
-                            onChange={event =>
-                                setPasswordConfirmation(event.target.value)
-                            }
-                            required
-                        />
-
-                        <InputError
-                            messages={errors.password_confirmation}
-                            className="mt-2"
-                        />
-                    </div>
-
-                    <div className="flex items-center justify-end mt-4">
-                        <Link
-                            href="/login"
-                            className="underline text-sm text-gray-600 hover:text-gray-900">
-                            Already registered?
-                        </Link>
-
-                        <Button className="ml-4">Register</Button>
-                    </div>
-                </form>
+            <AuthCard text='Sign up' >
+                <Box component="form" noValidate onSubmit={submitForm} sx={{ mt: 3 }}>
+                    <TextField
+                        margin="normal"
+                        autoComplete="name"
+                        name="name"
+                        required
+                        fullWidth
+                        id="name"
+                        label="Name"
+                        autoFocus
+                        onChange={event => setName(event.target.value)}
+                        helperText={errors.name ? errors.name : ''}
+                    />
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="email"
+                        label="Email Address"
+                        name="email"
+                        autoComplete="email"
+                        onChange={event => setEmail(event.target.value)}
+                        helperText={errors.email ? errors.email : ''}
+                    />
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="password"
+                        label="Password"
+                        type="password"
+                        id="password"
+                        autoComplete="new-password"
+                        onChange={event => setPassword(event.target.value)}
+                        helperText={errors.password ? errors.password : ''}
+                    />
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="passwordConfirmation"
+                        label="Confirm Password"
+                        type="password"
+                        id="passwordConfirmation"
+                        autoComplete="new-password"
+                        onChange={event => setPasswordConfirmation(event.target.value)}
+                        helperText={errors.password_confirmation ? errors.password_confirmation : ''}
+                    />
+                    <FormControlLabel
+                        control={<Checkbox value="allowExtraEmails" color="primary" />}
+                        label="I want to receive inspiration, marketing promotions and updates via email."
+                    />
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                    >
+                        Sign Up
+                    </Button>
+                    <Grid container justifyContent="flex-end">
+                        <Grid item>
+                            <Link href="/login" variant="body2">
+                                Already have an account? Sign in
+                            </Link>
+                        </Grid>
+                    </Grid>
+                </Box>
             </AuthCard>
         </GuestLayout>
     )
