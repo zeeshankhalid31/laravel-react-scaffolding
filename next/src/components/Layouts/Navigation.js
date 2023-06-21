@@ -27,7 +27,7 @@ import AdbIcon from '@mui/icons-material/Adb'
 import MenuIcon from '@mui/icons-material/Menu'
 
 const pages = ['Products', 'Pricing', 'Blog']
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
+const settings = ['Profile', 'Account', 'Dashboard']
 
 const Navigation = ({ user }) => {
     const router = useRouter()
@@ -197,6 +197,11 @@ const Navigation = ({ user }) => {
                                         </Typography>
                                     </MenuItem>
                                 ))}
+                                <MenuItem key="logout" onClick={logout}>
+                                    <Typography textAlign="center">
+                                        Logout
+                                    </Typography>
+                                </MenuItem>
                             </Menu>
                         </Box>
                     </Toolbar>

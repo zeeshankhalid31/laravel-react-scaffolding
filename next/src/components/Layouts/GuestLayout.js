@@ -1,4 +1,6 @@
+import { Avatar, Box } from '@mui/material'
 import Head from 'next/head'
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 
 const GuestLayout = ({ children }) => {
     return (
@@ -7,9 +9,10 @@ const GuestLayout = ({ children }) => {
                 <title>Laravel</title>
             </Head>
 
-            <div className="font-sans text-gray-900 antialiased">
+            {children}
+            {/* <div className="font-sans text-gray-900 antialiased">
                 {children}
-            </div>
+            </div> */}
         </div>
     )
 }

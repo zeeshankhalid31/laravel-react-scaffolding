@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
 import GuestLayout from '@/components/Layouts/GuestLayout'
+import { Button, Typography } from '@mui/material'
 
 export default function Home() {
     const { user } = useAuth({ middleware: 'guest' })
@@ -12,7 +13,13 @@ export default function Home() {
                 <Head>
                     <title>Laravel</title>
                 </Head>
-
+                <Button
+                    LinkComponent={Link}
+                    href="/dashboard"
+                    variant="contained"
+                    color="primary">
+                    Dashboard
+                </Button>
                 <div className="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
                     <div className="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                         {user ? (
@@ -78,12 +85,12 @@ export default function Home() {
                                     <div className="ml-12">
                                         <div className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
                                             Laravel has wonderful, thorough
-                                            documentation covering every aspect of
-                                            the framework. Whether you are new to
-                                            the framework or have previous
-                                            experience with Laravel, we recommend
-                                            reading all of the documentation from
-                                            beginning to end.
+                                            documentation covering every aspect
+                                            of the framework. Whether you are
+                                            new to the framework or have
+                                            previous experience with Laravel, we
+                                            recommend reading all of the
+                                            documentation from beginning to end.
                                         </div>
                                     </div>
                                 </div>
@@ -115,9 +122,10 @@ export default function Home() {
                                         <div className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
                                             Laracasts offers thousands of video
                                             tutorials on Laravel, PHP, and
-                                            JavaScript development. Check them out,
-                                            see for yourself, and massively level up
-                                            your development skills in the process.
+                                            JavaScript development. Check them
+                                            out, see for yourself, and massively
+                                            level up your development skills in
+                                            the process.
                                         </div>
                                     </div>
                                 </div>
@@ -147,10 +155,11 @@ export default function Home() {
                                     <div className="ml-12">
                                         <div className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
                                             Laravel News is a community driven
-                                            portal and newsletter aggregating all of
-                                            the latest and most important news in
-                                            the Laravel ecosystem, including new
-                                            package releases and tutorials.
+                                            portal and newsletter aggregating
+                                            all of the latest and most important
+                                            news in the Laravel ecosystem,
+                                            including new package releases and
+                                            tutorials.
                                         </div>
                                     </div>
                                 </div>
@@ -175,8 +184,9 @@ export default function Home() {
 
                                     <div className="ml-12">
                                         <div className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                            Laravel's robust library of first-party
-                                            tools and libraries, such as{' '}
+                                            Laravel's robust library of
+                                            first-party tools and libraries,
+                                            such as{' '}
                                             <a
                                                 href="https://forge.laravel.com"
                                                 className="underline">
@@ -200,9 +210,9 @@ export default function Home() {
                                                 className="underline">
                                                 Envoyer
                                             </a>{' '}
-                                            help you take your projects to the next
-                                            level. Pair them with powerful open
-                                            source libraries like{' '}
+                                            help you take your projects to the
+                                            next level. Pair them with powerful
+                                            open source libraries like{' '}
                                             <a
                                                 href="https://laravel.com/docs/billing"
                                                 className="underline">
