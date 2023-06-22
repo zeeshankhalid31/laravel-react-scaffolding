@@ -76,7 +76,7 @@ export default function UserList() {
                     <>
                         <Box sx={{ width: '100%' }}>
                             <Paper sx={
-                                { width: '100%', margin: 2 }
+                                { margin: 2 }
                             } >
                                 <DataTable
                                     tableConfig={tableConfig}
