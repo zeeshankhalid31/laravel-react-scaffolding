@@ -8,7 +8,7 @@ import DataTable from '@/components/DataTable'
 import useSWR from 'swr'
 import axios from '@/lib/axios'
 import { useRouter } from 'next/router'
-import { Box, Button, Paper, TablePagination } from '@mui/material'
+import { Box, Button, Container, Paper, Stack, TablePagination, Typography } from '@mui/material'
 
 const GetUserListData = URL =>
     axios
@@ -60,9 +60,33 @@ export default function UserList() {
     return (
         <AppLayout
             header={
-                <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Users List
-                </h2>
+                <>
+                    {/* Hero unit */}
+                    <Box
+                        sx={{
+                            bgcolor: 'background.paper',
+                            pt: 8,
+                            pb: 6,
+                        }}
+                    >
+                        <Container maxWidth="sm">
+                            <Typography
+                                component="h1"
+                                variant="h2"
+                                align="center"
+                                color="text.primary"
+                                gutterBottom
+                            >
+                               Users list
+                            </Typography>
+                            <Typography variant="h5" align="center" color="text.secondary" paragraph>
+                                Something short and leading about the collection below—its contents,
+                                the creator, etc. Make it short and sweet, but not too short so folks
+                                don&apos;t simply skip over it entirely.
+                            </Typography>
+                        </Container>
+                    </Box>
+                </>
             }>
             <Head>
                 <title>Users List</title>
