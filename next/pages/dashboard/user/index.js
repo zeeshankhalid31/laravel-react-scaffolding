@@ -8,6 +8,7 @@ import DataTable from '@/components/DataTable'
 import useSWR from 'swr'
 import axios from '@/lib/axios'
 import { useRouter } from 'next/router'
+import { Box, Button, Paper, TablePagination } from '@mui/material'
 
 const GetUserListData = URL =>
     axios
@@ -20,6 +21,8 @@ const GetUserListData = URL =>
 export default function UserList() {
     const router = useRouter()
 
+    const [rowsPerPage, setRowsPerPage] = useState(5);
+
     //#page1 routing on client side.
     const { asPath } = useRouter()
     const hash = asPath.split('#')[1]
@@ -29,7 +32,7 @@ export default function UserList() {
     const [pageIndex, setPageIndex] = useState(pageNum)
 
     const { data: users, error } = useSWR(
-        `/api/users?page=${pageIndex}&per_page=5`,
+        `/api/users?page=${pageIndex}&per_page=${rowsPerPage}`,
         GetUserListData,
     )
 
@@ -44,6 +47,16 @@ export default function UserList() {
     useEffect(() => {
         router.push({ hash: `page${pageIndex}` })
     }, [pageIndex, asPath])
+
+    const handleChangePage = (event, newPage) => {
+        // setPage(newPage);
+        setPageIndex(newPage + 1)
+    };
+
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPageIndex(0);
+    };
     return (
         <AppLayout
             header={
@@ -61,25 +74,29 @@ export default function UserList() {
                     <p>Loading information</p>
                 ) : (
                     <>
-                        <DataTable
-                            tableConfig={tableConfig}
-                            data={users.data}
-                        />
-                        <button
-                            onClick={() =>
-                                setPageIndex(pageIndex == 1 ? 1 : pageIndex - 1)
-                            }>
-                            Previous
-                        </button>
-                        <button
-                            onClick={() =>
-                                setPageIndex(parseInt(pageIndex) + 1)
-                            }>
-                            Next
-                        </button>
+                        <Box sx={{ width: '100%' }}>
+                            <Paper sx={
+                                { width: '100%', margin: 2 }
+                            } >
+                                <DataTable
+                                    tableConfig={tableConfig}
+                                    data={users.data}
+                                />
+                                <TablePagination
+                                    rowsPerPageOptions={[5, 10, 25]}
+                                    component='div'
+                                    count={users.meta.total}
+                                    rowsPerPage={users.meta.per_page}
+                                    page={pageIndex - 1}
+                                    onPageChange={handleChangePage}
+                                    onRowsPerPageChange={handleChangeRowsPerPage}
+
+                                ></TablePagination>
+                            </Paper>
+                        </Box>
                     </>
                 )}
             </Suspense>
-        </AppLayout>
+        </AppLayout >
     )
 }
