@@ -77,7 +77,7 @@ export default function UserList() {
                                 color="text.primary"
                                 gutterBottom
                             >
-                               Users list
+                                Users list
                             </Typography>
                             <Typography variant="h5" align="center" color="text.secondary" paragraph>
                                 Something short and leading about the collection below—its contents,
@@ -93,34 +93,32 @@ export default function UserList() {
             </Head>
 
             <title className={style.container}>Users List</title>
-            <Suspense fallback={<p>Loading user data ...</p>}>
-                {!users || error ? (
-                    <p>Loading information</p>
-                ) : (
-                    <>
-                        <Box sx={{ width: '100%' }}>
-                            <Paper sx={
-                                { margin: 2 }
-                            } >
-                                <DataTable
-                                    tableConfig={tableConfig}
-                                    data={users.data}
-                                />
-                                <TablePagination
-                                    rowsPerPageOptions={[5, 10, 25]}
-                                    component='div'
-                                    count={users.meta.total}
-                                    rowsPerPage={users.meta.per_page}
-                                    page={pageIndex - 1}
-                                    onPageChange={handleChangePage}
-                                    onRowsPerPageChange={handleChangeRowsPerPage}
+            {!users || error ? (
+                <p>Loading information</p>
+            ) : (
+                <>
+                    <Box sx={{ width: '100%' }}>
+                        <Paper sx={
+                            { margin: 2 }
+                        } >
+                            <DataTable
+                                tableConfig={tableConfig}
+                                data={users.data}
+                            />
+                            <TablePagination
+                                rowsPerPageOptions={[5, 10, 25]}
+                                component='div'
+                                count={users.meta.total}
+                                rowsPerPage={users.meta.per_page}
+                                page={pageIndex - 1}
+                                onPageChange={handleChangePage}
+                                onRowsPerPageChange={handleChangeRowsPerPage}
 
-                                ></TablePagination>
-                            </Paper>
-                        </Box>
-                    </>
-                )}
-            </Suspense>
+                            ></TablePagination>
+                        </Paper>
+                    </Box>
+                </>
+            )}
         </AppLayout >
     )
 }
